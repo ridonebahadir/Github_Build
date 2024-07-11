@@ -15,7 +15,7 @@ jobs:
         id: get-activation-file
         uses: game-ci/unity-request-manual-activation-file@v4
         with:
-          unityVersion: 2020.3.25f1
+          unityVersion: 2022.23.19f1
 
       - name: Upload activation file
         uses: actions/upload-artifact@v2
