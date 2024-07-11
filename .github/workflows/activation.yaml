@@ -1,4 +1,4 @@
-name: Activate Unity License
+name: Unity_Activation_File
 
 on:
   workflow_dispatch:
