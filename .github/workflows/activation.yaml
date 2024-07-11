@@ -1,0 +1,24 @@
+name: Activate Unity License
+
+on:
+  workflow_dispatch:
+
+jobs:
+  activate:
+    name: Request Activation File
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Request activation file
+        id: get-activation-file
+        uses: game-ci/unity-request-manual-activation-file@v4
+        with:
+          unityVersion: 2020.3.25f1
+
+      - name: Upload activation file
+        uses: actions/upload-artifact@v2
+        with:
+          name: Unity_Activation_File
+          path: ${{ steps.get-activation-file.outputs.activationFilePath }}
