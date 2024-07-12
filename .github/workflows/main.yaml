@@ -21,6 +21,9 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           targetPlatform: WebGL
 
+      - name: Upload artifact
+        uses: echapmanFromBunnings/upload-artifact@3.0.0
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
