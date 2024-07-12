@@ -20,3 +20,9 @@ jobs:
           projectPath: .
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           targetPlatform: WebGL
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build
+          path: build
