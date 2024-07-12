@@ -9,10 +9,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        projectPath: 
-          - test-package
-        unityVersion: 
-          - '2021.3.33f1' # Unity versiyonunu burada liste olarak belirtiyoruz
+        projectPath:
+          - .  # Unity projesinin kök dizini burada belirtilmeli
+        unityVersion:
+          - '2021.3.33f1'
         testMode:
           - playmode
           - editmode
