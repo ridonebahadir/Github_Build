@@ -17,7 +17,7 @@ jobs:
       - name: Setup Unity
         uses: game-ci/unity-builder@v2
         with:
-          unityVersion: 2022.3.19f
+          unityVersion: 2020.3.25f1
 
       - name: Activate Unity License
         uses: game-ci/unity-activate@v2
@@ -33,4 +33,4 @@ jobs:
           androidKeystoreBase64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
           androidKeystorePass: ${{ secrets.ANDROID_KEYSTORE_PASS }}
           androidKeyaliasName: ${{ secrets.ANDROID_KEYALIAS_NAME }}
-          androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }} 
+          androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
