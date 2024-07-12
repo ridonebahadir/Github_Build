@@ -1,4 +1,4 @@
-name: Unity Android Build
+name: Unity Build
 
 on:
   push:
@@ -15,32 +15,14 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - name: Unity - Request Activation File
+        uses: game-ci/unity-request-activation-file@v2.2.0
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
+      - name: Unity Build
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          distribution: 'adopt'
-          java-version: '11'
-
-      - name: Set up Unity
-        uses: game-ci/setup-unity@v1
-        with:
-          unityVersion: '2022.3.19f'
-          modules: 'android'
-
-      - name: Unity Android Build
-        run: |
-          UNITY_LICENSE="$UNITY_LICENSE" UNITY_EMAIL="$UNITY_EMAIL" UNITY_PASSWORD="$UNITY_PASSWORD" unity-editor -quit -batchmode -executeMethod BuildScript.PerformAndroidBuild
-
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: AndroidBuild
-          path: Build/Android
-
-    env:
-      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-      UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-      UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          targetPlatform: WebGL
