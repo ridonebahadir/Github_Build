@@ -17,5 +17,5 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          projectPath: C:/Users/paper/Desktop/Unity/Github_Build
+          projectPath: .
           githubToken: ${{ secrets.GITHUB_TOKEN }}
