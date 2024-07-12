@@ -9,9 +9,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        projectPath:
+        projectPath: 
           - test-package
-        unityVersion: '2021.3.33f1' # some version must be included for package testing
+        unityVersion: 
+          - '2021.3.33f1' # Unity versiyonunu burada liste olarak belirtiyoruz
         testMode:
           - playmode
           - editmode
