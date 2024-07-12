@@ -35,7 +35,7 @@ jobs:
     - name: Build Unity project
       run: |
         "C:\Program Files\Unity\Hub\Editor\2022.3.19f1\Editor\Unity.exe" \
-          -projectPath ${{ github.workspace }}/GithubActions
+          -projectPath ${{ github.workspace }}\Github_Build
           -batchmode \
           -quit \
           -executeMethod BuildScript.PerformBuild
