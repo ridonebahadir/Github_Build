@@ -1,0 +1,60 @@
+name: Unity Build
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Unity
+      uses: game-ci/setup-unity@v1
+      with:
+        unityVersion: 2020.3.x
+        modules: unity-test-framework
+
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: Library
+        key: ${{ runner.os }}-unity-${{ hashFiles('**/ProjectSettings/ProjectVersion.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-unity-
+
+    - name: Build Unity project
+      run: |
+        "C:\Program Files\Unity\Hub\Editor\2022.3.19f1\Editor\Unity.exe" \
+          -projectPath ${{ github.workspace }}/GithubActions
+          -batchmode \
+          -quit \
+          -executeMethod BuildScript.PerformBuild
+
+    - name: Archive build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Build Artifacts
+        path: Build
+
+    - name: Run tests
+      run: |
+        "C:\Program Files\Unity\Hub\Editor\2022.3.19f1\Editor\Unity.exe" \
+          -batchmode \
+          -runTests \
+          -testPlatform editmode
+
+    - name: Publish test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: Test Results
+        path: TestResults
