@@ -19,3 +19,4 @@ jobs:
         with:
           projectPath: .
           githubToken: ${{ secrets.GITHUB_TOKEN }}
+          targetPlatform: WebGL
