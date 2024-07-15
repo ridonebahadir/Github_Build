@@ -3,27 +3,7 @@ name: Build project
 on: [push, pull_request]
 
 jobs:
-  check-commit-message:
-    runs-on: ubuntu-latest
-    outputs:
-      run_build: ${{ steps.check_commit.outputs.run_build }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Check commit message
-        id: check_commit
-        run: |
-          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
-          echo "Commit message: $COMMIT_MESSAGE"
-          if [[ "$COMMIT_MESSAGE" == *"BUILD_TRIGGER"* ]]; then
-            echo "run_build=true" >> $GITHUB_ENV
-          else
-            echo "run_build=false" >> $GITHUB_ENV
-          fi
-
   buildForAllSupportedPlatforms:
-    if: env.run_build == 'true'
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
@@ -31,8 +11,13 @@ jobs:
       matrix:
         targetPlatform:
           - Android # Build an Android .apk standalone app.
-
+         
     steps:
+
+
+      - name: say hello
+      if: contains(github.event.comment.body, '/support')   # check the comment if it contains the keywords
+      
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -59,8 +44,9 @@ jobs:
           androidKeystorePass: ${{ secrets.KEYSTORE_PASSWORD }}
           androidKeyaliasName: ${{ secrets.KEY_ALIAS }}
           androidKeyaliasPass: ${{ secrets.KEY_PASSWORD }}
-
+      
       - uses: actions/upload-artifact@v3
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
+      
