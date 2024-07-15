@@ -19,7 +19,7 @@ jobs:
         run: |
           COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           echo "Commit message: $COMMIT_MESSAGE"
-          if [[ "$COMMIT_MESSAGE" == *"BUILD_TRIGGER"* ]]; then
+          if [[ "$COMMIT_MESSAGE" == *Build* ]]; then
             echo "::set-output name=run_build::true"
           else
             echo "::set-output name=run_build::false"
@@ -32,7 +32,7 @@ jobs:
       fail-fast: false
       matrix:
         targetPlatform:
-          - Android # Android .apk bağımsız uygulaması oluştur.
+          - Android
          
     steps:
       - uses: actions/checkout@v4
