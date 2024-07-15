@@ -34,7 +34,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
-          customParameters: '-buildTarget Android -executeMethod BuildScript.PerformBuild'
+          customParameters: '-executeMethod BuildScript.PerformBuild'
           androidKeystoreName: android.keystore
           androidKeystoreBase64: ${{ secrets.KEYSTORE_BASE64 }}
           androidKeystorePass: ${{ secrets.KEYSTORE_PASSWORD }}
