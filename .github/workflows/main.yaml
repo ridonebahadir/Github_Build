@@ -52,10 +52,14 @@ jobs:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
 
-      - name: Upload Artifact to Slack
-        uses: rtCamp/action-slack-upload-release-assets@v1
+      - name: Slack Notification
+        if: always()
+        uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          artifact-name: Build-${{ matrix.targetPlatform }}
-          artifact-path: build/${{ matrix.targetPlatform }}
+          status: ${{ job.status }}
+          mention: here
+          text: |
+            Build for ${{ matrix.targetPlatform }} completed.
+          fields: targetPlatform=${{ matrix.targetPlatform }}
