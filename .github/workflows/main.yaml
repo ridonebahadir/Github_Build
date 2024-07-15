@@ -11,7 +11,7 @@ on:
 jobs:
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
-    if: contains(github.event_name, 'build')
+    if: github.event_name == 'build'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
