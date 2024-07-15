@@ -3,7 +3,7 @@ name: Build Project
 on:
   push:
     tags:
-      - '*'
+      - main
 
 jobs:
   buildForAllSupportedPlatforms:
