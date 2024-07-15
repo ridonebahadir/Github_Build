@@ -3,15 +3,15 @@ name: Build project
 on:
   push:
     branches:
-      - main  # Burada sadece belirli bir branch üzerinde çalışmasını istiyorsanız bu kısmı güncelleyin
+      - main
   pull_request:
     branches:
-      - main  # Pull requestler için de aynı branch üzerinde çalışmasını istiyorsanız bu kısmı güncelleyin
+      - main 
 
 jobs:
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
-    if: github.event_name == 'build'
+    if: contains(github.event.head_commit.message, 'build')
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
