@@ -51,3 +51,12 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
+
+      - name: Upload Artifact to Slack
+        uses: rtCamp/action-slack-upload-release-assets@v1
+        env:
+          SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        with:
+          artifact-name: Build-${{ matrix.targetPlatform }}
+          artifact-path: build/${{ matrix.targetPlatform }}
