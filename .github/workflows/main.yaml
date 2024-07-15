@@ -18,7 +18,7 @@ jobs:
       matrix:
         targetPlatform:
           - Android
-         
+          
     steps:
       - uses: actions/checkout@v4
         with:
@@ -48,18 +48,15 @@ jobs:
           androidKeyaliasPass: ${{ secrets.KEY_PASSWORD }}
       
       - uses: actions/upload-artifact@v3
+        id: upload
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
 
-      - name: Slack Notification
+      - name: Slack Notification with Build URL
         if: always()
-        uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-        with:
-          status: ${{ job.status }}
-          mention: here
-          text: |
-            Build for ${{ matrix.targetPlatform }} completed.
-          fields: targetPlatform=${{ matrix.targetPlatform }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          BUILD_URL: ${{ steps.upload.outputs.upload_url }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"New build available: '${{ matrix.targetPlatform }}'. Download it from: '${{ env.BUILD_URL }}'"}' $SLACK_WEBHOOK_URL
