@@ -20,7 +20,8 @@ jobs:
             echo "::set-output name=run_build::true"
           else
             echo "::set-output name=run_build::false"
-          
+          fi
+
   buildForAllSupportedPlatforms:
     if: needs.check-commit-message.outputs.run_build == 'true'
     name: Build for ${{ matrix.targetPlatform }}
