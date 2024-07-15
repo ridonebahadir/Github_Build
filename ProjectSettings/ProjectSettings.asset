@@ -253,15 +253,15 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: Desktop/user.keystore'
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: "C:/Users/paper/Desktop/Yeni klas\xF6r (2)/new.keystore"
+  AndroidKeyaliasName: rbt
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
   AndroidEnableTango: 0
   androidEnableBanner: 1
   androidUseLowAccuracyLocation: 0
-  androidUseCustomKeystore: 0
+  androidUseCustomKeystore: 1
   m_AndroidBanners:
   - width: 320
     height: 180
